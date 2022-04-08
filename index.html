@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Крестики и Нолики</title>
+
+	<link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+	<section class="game">
+		<header class="game__header">
+			<h1 class="header__title">
+				<span class="header__crosses">Крестики</span> 
+				&mdash;
+				<span class="header__zeroes">Нолики</span>
+			</h1>
+
+			<div class="header__score">
+				Счет
+				<div class="score__container">
+					<div class="score__cross" data-score="0"></div>
+					:
+					<div class="score__zero" data-score="0"></div>
+				</div>
+			</div>
+		</header>
+
+		<main class="game__grid">
+			<div class="grid__cell grid__cell--bordered"></div>
+			<div class="grid__cell grid__cell--bt grid__cell--bb"></div>
+			<div class="grid__cell grid__cell--bordered"></div>
+			<div class="grid__cell grid__cell--bl grid__cell--br"></div>
+			<div class="grid__cell"></div>
+			<div class="grid__cell grid__cell--bl grid__cell--br"></div>
+			<div class="grid__cell grid__cell--bordered"></div>
+			<div class="grid__cell grid__cell--bt grid__cell--bb"></div>
+			<div class="grid__cell grid__cell--bordered"></div>
+		</main>
+
+		<div class="game__player-move" style="display: none;">
+			Ход
+			<span class="cross-move" style="display: none;">крестиков</span>
+			<span class="zero-move" style="display: none;">ноликов</span>
+			!
+		</div>
+
+		<div class="game__controls">
+			<button class="button button-restart">Начать заново</button>
+			<button class="button button-reset">Сбросить счет</button>
+		</div>
+
+		<div class="modal-backdrop hidden">
+			<div class="modal hidden">
+				<div class="modal__cross">&cross;</div>
+	
+				<span class="modal__message"></span> 
+				<span class="modal__winner"></span>!
+	
+				<button class="modal__button">Заново!</button>
+			</div>
+		</div>
+	</section>
+
+	<template id="cross-template">
+		<svg class="cross-line">
+			<line 
+				x1="10%" 
+				y1="10%" 
+				x2="90%" 
+				y2="90%"
+			>
+				<animate attributeName="x2" dur=".1s" values="0%;100%" />
+				<animate attributeName="y2" dur=".1s" values="0%;100%" />
+			</line>
+		</svg>
+		<svg class="cross-line">
+			<line 
+				x1="90%" 
+				y1="10%" 
+				x2="90%" 
+				y2="10%"
+			>
+				<animate begin=".1s" attributeName="x2" dur=".1s" values="90%;10%" fill="freeze" />
+				<animate begin=".1s" attributeName="y2" dur=".1s" values="10%;90%" fill="freeze" />
+			</line>
+		</svg>
+	</template>
+
+	<template id="zero-template">
+		<svg class="zero-circle">
+			<circle cx="50%" cy="50%" r="40%" fill="none"></circle>
+		</svg>
+	</template>
+
+	<script src="./scripts/main.js" type="module"></script>
+	<!-- <script src="./tests/main.test.js" type="module"></script> -->
+</body>
+</html>

@@ -1,0 +1,263 @@
+/* Common styles */
+
+section, header, div, h1, span, main, body, html, button {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--cross-color: #2424e2;
+	--zero-color: #43a50b;
+	--cell-size: 100px;
+}
+
+body {
+	font-family: "Arial";
+}
+
+.game {
+	padding-top: 20px;
+	position: relative;
+}
+
+/* Header styles */
+
+.header__title {
+	text-align: center;
+}
+
+.header__crosses {
+	color: var(--cross-color);
+}
+
+.header__zeroes {
+	color: var(--zero-color);
+}
+
+.header__score {
+	margin-top: 20px;
+	font-size: 20px;
+	font-weight: 700;
+	text-align: center;
+}
+
+/* Score styles */
+
+.score__container {
+	margin-top: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+	column-gap: 10px;
+}
+
+.score__cross {
+	color: var(--cross-color);
+	font-weight: bold;
+}
+
+.score__zero {
+	color: var(--zero-color);
+	font-weight: bold;
+}
+
+.score__cross::after {
+	content: attr(data-score);
+}
+
+.score__zero::after {
+	content: attr(data-score);
+}
+
+/* Grid styles */
+
+.game__grid {
+	margin-top: 30px;
+	display: grid;
+	justify-content: center;
+	grid-template: repeat(3, var(--cell-size)) / repeat(3, var(--cell-size));
+	position: relative;
+}
+
+.game__grid--disabled {
+	pointer-events: none;
+}
+
+.grid__cell {
+	cursor: pointer;
+	position: relative;
+}
+
+.grid__cell.grid__cell--bordered {
+	border: 1px solid #000;
+}
+
+.grid__cell.grid__cell--bl {
+	border-left: 1px solid #000;
+}
+
+.grid__cell.grid__cell--br {
+	border-right: 1px solid #000;
+}
+
+.grid__cell.grid__cell--bt {
+	border-top: 1px solid #000;;
+}
+
+.grid__cell.grid__cell--bb {
+	border-bottom: 1px solid #000;
+}
+
+/* Player move styles */
+
+.game__player-move {
+	margin-top: 20px;
+	text-align: center;
+	font-weight: 700;
+}
+
+.game__player-move .cross-move {
+	color: var(--cross-color);
+}
+
+.game__player-move .zero-move {
+	color: var(--zero-color);
+}
+
+/* Buttons styles */
+
+.game__controls {
+	margin-top: 20px;
+	display: flex;
+	column-gap: 20px;
+	justify-content: center;
+}
+
+.button {
+	border-style: solid;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: #fff;
+	display: block;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+/* Styles for cross */
+
+.cross-line {
+	position: absolute;
+	stroke: var(--cross-color);
+	width: 100%;
+	height: 100%;
+}
+
+.cross-line > line {
+	stroke-width: 10px;
+}
+
+/* Styles for cirlce(zero) */
+
+@keyframes circle-drawning {
+	from {
+		stroke-dashoffset: 300;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+.zero-circle {
+	stroke-dashoffset: 0;
+	stroke-dasharray: 300;
+	stroke-width: 10px;
+	stroke: var(--zero-color);
+	animation: circle-drawning .3s linear;
+	width: 100%;
+	height: 100%;
+}
+
+/* Controlled by JavaScript */
+
+.transitioned {
+	transition: border-color 1s, opacity 1s;
+}
+
+.transparent-border {
+	border-color: transparent !important;
+}
+
+.grid__cell--lighten {
+	opacity: 0.05;
+}
+
+.hidden {
+	display: none;
+}
+
+.cross-color {
+	color: var(--cross-color);
+}
+
+.zero-color {
+	color: var(--zero-color);
+}
+
+/* Modal styles */
+
+.modal-backdrop {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: min-content;
+    height: min-content;
+    min-width: 250px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    background-color: #fff;
+    z-index: 1;
+    padding: 25px 15px;
+    box-shadow: 0 0 10px 0px;
+	transform: scale(0);
+	text-align: center;
+	font-weight: 600;
+}
+
+.modal__cross {
+	position: absolute;
+    right: 5px;
+    top: 0;
+    cursor: pointer;
+}
+
+.modal__button {
+	display: block;
+    margin: 15px auto 0 auto;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+	font-weight: 600;
+}
+
+.modal--opened {
+	transition: transform .4s cubic-bezier(0.17, -0.01, 0.12, 2.52);
+	transform: scale(1);
+}
+
+.modal--closed {
+	transition: transform .4s;
+	transform: scale(0);
+}
